@@ -15,27 +15,36 @@ Walls walls;
 
 // dotToPixel gives the pixel coordinate in the *center* of the corresponding box
 float dotToPixel(int x) {
-    return (0.5 + x) * dotSpacing;
+  return (0.5 + x) * dotSpacing;
 }
 
 // pixelToDot finds the box in which the pixel is contained
 int pixelToDot(float x) {
-    if (x > boardWidth * dotSpacing) {
-        println(x);
-    }
-    return floor(x / dotSpacing);
+  if (x > boardWidth * dotSpacing) {
+    println(x);
+  }
+  return floor(x / dotSpacing);
 }
 
 void setup() {
-    size(900,900);
-    dots = new Dots();
-    pac = new Pac();
-    walls = new Walls();
+  size(900, 900);
+  dots = new Dots();
+  pac = new Pac();
+  walls = new Walls();
 }
 
 void draw() {
-    clear();
-    dots.render();
-    pac.render();
-    walls.render();
+  clear();
+  dots.render();
+  pac.render();
+  walls.render();
 }
+
+/*Dir turn () {
+  if (keyCode == 'UP') {
+    Dir travelDirection = Dir.NORTH;
+  } else if (keyCode == 'LEFT') {
+    Dir travelDirection = Dir.WEST;
+  }
+}
+*/

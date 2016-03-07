@@ -4,6 +4,12 @@ class Dots {
 
    // Create an initial board with every dot present
    Dots() {
+     dots = new boolean [boardHeight] [boardWidth];
+     for (int i = 0; i <= boardHeight; i++) {
+       for (int j = 0; j <= boardWidth; j++) {
+         dots[i] [j] = true;
+       }
+     }
    }
 
    // remove any dots between the two positions
@@ -22,6 +28,14 @@ class Dots {
 
    // Draw the dots.  Use `dotToPixel`
    void render() {
+     for (int i = 0; i <= boardHeight; i++) {
+       for (int j = 0; j <= boardWidth; j++) {
+         if (dots [i] [j]) {
+           ellipseMode(CENTER);
+           ellipse(dotToPixel(i),dotToPixel(j),dotRadius, dotRadius);
+         }
+       }
+     }
    }
 
 }
