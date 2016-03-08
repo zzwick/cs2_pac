@@ -39,12 +39,3 @@ void draw() {
   pac.render();
   walls.render();
 }
-
-/*Dir turn () {
-  if (keyCode == 'UP') {
-    Dir travelDirection = Dir.NORTH;
-  } else if (keyCode == 'LEFT') {
-    Dir travelDirection = Dir.WEST;
-  }
-}
-*/
