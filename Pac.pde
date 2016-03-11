@@ -22,7 +22,7 @@ class Pac {
   void render() {
     ellipseMode(CENTER);
     fill(0, 200, 0);
-    ellipse(position.x, position.y, dotSpacing/2, dotSpacing/2);
+    ellipse(position.x, position.y, pacSize, pacSize);
   }
 
   // If the given vector is off the screen, wrap it around to the other side
@@ -30,32 +30,27 @@ class Pac {
   // If this were public, we probably woudn't modify the vector in place like this.
   private void wrapPosition(PVector vec) {
     if (vec.x > 900) {
-      vec = new PVector (0, vec.y);
+      vec.x = 0;
     } else if (vec.x < 0) {
-      vec = new PVector (900, vec.y);
+      vec.x = 900;
     } else if (vec.y > 900) {
-      vec = new PVector (vec.x, 0);
+      vec.y = 0;
     } else if (vec.y < 0) {
-      vec = new PVector (vec.x, 900);
+      vec.y = 900;
     }
   }
 
 
   // reverse the movement direction
   private void reverseDirection() {
-    switch(travelDirection) {
-    case Dir.NORTH:
-      travelDirection = setDirection(Dir.SOUTH);
-      break;
-    case Dir.SOUTH:
-      travelDirection = setDirection(Dir.NORTH);
-      break;
-    case Dir.WEST:
-      travelDirection = setDirection(Dir.EAST);
-      break;
-    case Dir.EAST:
-      travelDirection = setDirection(Dir.WEST);
-      break;
+    if (travelDirection == Dir.NORTH) {
+      setDirection(Dir.SOUTH);
+    } else if (travelDirection == Dir.SOUTH) {
+      setDirection(Dir.NORTH);
+    } else if (travelDirection == Dir.WEST) {
+      setDirection(Dir.EAST);
+    } else if (travelDirection == Dir.EAST) {
+      setDirection(Dir.WEST);
     }
   }
 
@@ -65,20 +60,27 @@ class Pac {
   // The total distance travelled (before + after hitting the wall) should be the same.
   void updatePosition(Walls walls) {
     if (keyPressed == true) {
-      switch (keyCode) {
-      case UP:
+      if (keyCode == UP) {
         travelDirection = Dir.NORTH;
-        break;
-      case DOWN:
+      } else if (keyCode == DOWN) {
         travelDirection = Dir.SOUTH;
-        break;
-      case RIGHT:
+      } else if (keyCode == RIGHT) {
         travelDirection = Dir.EAST;
-        break;
-      case LEFT:
+      } else if (keyCode == LEFT) {
         travelDirection = Dir.WEST;
-        break;
       }
     }
+    if (travelDirection == Dir.NORTH) {
+      position = new PVector (position.x, position.y - speed);
+    } else if (travelDirection == Dir.SOUTH) {
+      position = new PVector (position.x, position.y + speed);
+    } else if (travelDirection == Dir.EAST) {
+      position = new PVector (position.x + speed, position.y);
+    } else if (travelDirection == Dir.WEST) {
+      position = new PVector (position.x - speed, position.y);
+    }
+    wrapPosition(position);
+    walls.collision(position);
+    println(travelDirection);
   }
 }

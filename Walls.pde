@@ -35,20 +35,45 @@ class Walls {
   // If there is a wall between the two given positions, return the point of collision.
   // Otherwise, return some value that can never be a collision.
   // Input & Output are in pixel coordinates
-  PVector collision(PVector fromPosition, PVector toPosition) {
+  void collision(PVector fromPosition/*,PVector toPosition*/) {
+    for (int i = 0; i < boardHeight; i++) {
+      for (int j = 0; j < boardWidth; j++) {
+        if (vertical [i] [j]) {
+          if (((dotToPixel (i)) - fromPosition.x) < ((pacSize/2)+(wallHor/2))) {
+            if (((dotToPixel (i)) - fromPosition.x) > (-((pacSize/2)+(wallHor/2))))
+              if (((dotToPixel (j)) - fromPosition.y) < ((pacSize/2)+(wallVert/2))) {
+                if (((dotToPixel (j)) - fromPosition.y) > (-((pacSize/2)+(wallVert/2)))) {
+                  pac.reverseDirection();
+                }
+              }
+          }
+        }
+        if (horizontal [i] [j]) {
+          if (((dotToPixel (i)) - fromPosition.x) < ((pacSize/2)+(wallVert/2))) {
+            if (((dotToPixel (i)) - fromPosition.x) > (-((pacSize/2)+(wallVert/2))))
+              if (((dotToPixel (j)) - fromPosition.y) < ((pacSize/2)+(wallHor/2))) {
+                if (((dotToPixel (j)) - fromPosition.y) > (-((pacSize/2)+(wallHor/2)))) {
+                  pac.reverseDirection();
+                }
+              }
+          }
+        }
+      }
+    }
   }
+  
 
   void render() {
-    for (int i = 0; i <= boardHeight; i++) {
-      for (int j = 0; j <= boardWidth; j++) {
+    for (int i = 0; i < boardHeight; i++) {
+      for (int j = 0; j < boardWidth; j++) {
         if (vertical [i] [j]) {
+          fill(110, 232, 255);
+          rect(dotToPixel(i), dotToPixel(j)+dotSpacing/2, wallHor, wallVert);
+        }
+        if (horizontal [i] [j]) {
           rectMode(CENTER);
-          fill(200,0,0);
-          rect(i, j, dotRadius*3, dotRadius*3);
-        } else if (horizontal [i] [j]) {
-          rectMode(CENTER);
-          fill(200,0,0);
-          rect(i, j, dotRadius*3, dotRadius*3);
+          fill(110, 232, 255);
+          rect(dotToPixel(i)+dotSpacing/2, dotToPixel(j), wallVert, wallHor);
         }
       }
     }
