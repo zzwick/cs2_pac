@@ -61,13 +61,21 @@ class Pac {
   void updatePosition(Walls walls) {
     if (keyPressed == true) {
       if (keyCode == UP) {
-        travelDirection = Dir.NORTH;
+        if (above == false) {
+          travelDirection = Dir.NORTH;
+        }
       } else if (keyCode == DOWN) {
-        travelDirection = Dir.SOUTH;
+        if (below == false) {
+          travelDirection = Dir.SOUTH;
+        }
       } else if (keyCode == RIGHT) {
-        travelDirection = Dir.EAST;
+        if (right == false) {
+          travelDirection = Dir.EAST;
+        }
       } else if (keyCode == LEFT) {
-        travelDirection = Dir.WEST;
+        if (left == false) {
+          travelDirection = Dir.WEST;
+        }
       }
     }
     if (travelDirection == Dir.NORTH) {

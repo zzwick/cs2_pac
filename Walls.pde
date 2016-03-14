@@ -36,24 +36,46 @@ class Walls {
   // Otherwise, return some value that can never be a collision.
   // Input & Output are in pixel coordinates
   void collision(PVector fromPosition/*,PVector toPosition*/) {
+    right = false;
+    left = false;
+    above = false;
+    below = false;
     for (int i = 0; i < boardHeight; i++) {
       for (int j = 0; j < boardWidth; j++) {
         if (vertical [i] [j]) {
           if (((dotToPixel (i)) - fromPosition.x) < ((pacSize/2)+(wallHor/2))) {
             if (((dotToPixel (i)) - fromPosition.x) > (-((pacSize/2)+(wallHor/2))))
-              if (((dotToPixel (j)) - fromPosition.y) < ((pacSize/2)+(wallVert/2))) {
-                if (((dotToPixel (j)) - fromPosition.y) > (-((pacSize/2)+(wallVert/2)))) {
-                  pac.reverseDirection();
+              if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) < ((pacSize/2)+(wallVert/2))) {
+                if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) > (-((pacSize/2)+(wallVert/2)))) {
+                  if (((dotToPixel (i)) - fromPosition.x) < 0) {
+                    pac.reverseDirection();
+                    right = true;
+                    hit = true;
+                  } 
+                  if (((dotToPixel (i)) - fromPosition.x) > 0) {
+                    pac.reverseDirection();
+                    left = true;
+                    hit = true;
+                  }
                 }
               }
           }
         }
         if (horizontal [i] [j]) {
-          if (((dotToPixel (i)) - fromPosition.x) < ((pacSize/2)+(wallVert/2))) {
-            if (((dotToPixel (i)) - fromPosition.x) > (-((pacSize/2)+(wallVert/2))))
+          if (((dotToPixel (i)+dotSpacing/2) - fromPosition.x) < ((pacSize/2)+(wallVert/2))) {
+            if (((dotToPixel (i)+dotSpacing/2) - fromPosition.x) > (-((pacSize/2)+(wallVert/2))))
               if (((dotToPixel (j)) - fromPosition.y) < ((pacSize/2)+(wallHor/2))) {
                 if (((dotToPixel (j)) - fromPosition.y) > (-((pacSize/2)+(wallHor/2)))) {
-                  pac.reverseDirection();
+                  if (((dotToPixel (j)) - fromPosition.x) < 0) {
+                    pac.reverseDirection();
+                    below = true;
+                    hit = true;
+                  } 
+                  if (((dotToPixel (j)) - fromPosition.x) > 0) {
+                    pac.reverseDirection();
+                    above = true;
+                    hit = true;
+                  }
                 }
               }
           }
@@ -61,7 +83,7 @@ class Walls {
       }
     }
   }
-  
+
 
   void render() {
     for (int i = 0; i < boardHeight; i++) {

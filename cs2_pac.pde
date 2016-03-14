@@ -6,6 +6,11 @@ float pacSize = dotSpacing/2;
 int wallVert = dotSpacing;
 int wallHor = dotSpacing/10;
 int score = 0;
+boolean above = false;
+boolean below = false;
+boolean right = false;
+boolean left = false;
+boolean hit = false;
 
 Dots dots;
 Pac pac;
