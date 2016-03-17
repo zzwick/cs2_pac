@@ -2,7 +2,7 @@ final int boardWidth = 30; // number of dots across
 final int boardHeight = 30; // number of dots down
 final int dotSpacing = 30; // pixels between dot centers
 final int dotRadius = 3; // pixels
-float pacSize = dotSpacing/2;
+float pacSize = dotSpacing/1.5;
 int wallVert = dotSpacing;
 int wallHor = dotSpacing/10;
 int score = 0;
@@ -50,4 +50,5 @@ void draw() {
   dots.printScore();
   pac.updatePosition(walls);
   dots.remove(pac.position);
+  println(pac.travelDirection);
 }

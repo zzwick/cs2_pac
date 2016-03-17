@@ -89,6 +89,25 @@ class Pac {
     }
     wrapPosition(position);
     walls.collision(position);
+    moveIfCollide();
     println(travelDirection);
+  }
+  void moveIfCollide () {
+    if (right) {
+      //    position = (position.x - wallHor, position.y);
+      position.x = position.x - wallHor;
+    }
+    else if (left) {
+      //    position = (position.x + wallHor, position.y);
+      position.x = position.x + wallHor;
+    }
+    if (above) {
+      //    position = (position.x , position.y + wallHor);
+      position.y = position.y + wallHor;
+    }
+    else if (below) {
+      //    position = (position.x , position.y - wallHor);
+      position.y = position.y - wallHor;
+    }
   }
 }

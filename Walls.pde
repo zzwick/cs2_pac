@@ -47,15 +47,26 @@ class Walls {
             if (((dotToPixel (i)) - fromPosition.x) > (-((pacSize/2)+(wallHor/2))))
               if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) < ((pacSize/2)+(wallVert/2))) {
                 if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) > (-((pacSize/2)+(wallVert/2)))) {
-                  if (((dotToPixel (i)) - fromPosition.x) < 0) {
+                  if (((dotToPixel (i)) - fromPosition.x) >= 0) {
                     pac.reverseDirection();
                     right = true;
                     hit = true;
                   } 
-                  if (((dotToPixel (i)) - fromPosition.x) > 0) {
+                  if (((dotToPixel (i)) - fromPosition.x) < 0) {
                     pac.reverseDirection();
                     left = true;
                     hit = true;
+                  if (((dotToPixel (i)) - fromPosition.x) == 0) {
+                    if (pac.travelDirection == Dir.NORTH) {
+                      above = true;
+                      hit = true;
+                      pac.reverseDirection();
+                    } else if (pac.travelDirection == Dir.SOUTH) {
+                      below = true;
+                      hit = true;
+                      pac.reverseDirection();
+                    }
+                  } 
                   }
                 }
               }
@@ -66,12 +77,23 @@ class Walls {
             if (((dotToPixel (i)+dotSpacing/2) - fromPosition.x) > (-((pacSize/2)+(wallVert/2))))
               if (((dotToPixel (j)) - fromPosition.y) < ((pacSize/2)+(wallHor/2))) {
                 if (((dotToPixel (j)) - fromPosition.y) > (-((pacSize/2)+(wallHor/2)))) {
-                  if (((dotToPixel (j)) - fromPosition.x) < 0) {
+                  if (((dotToPixel (j)) - fromPosition.y) > 0) {
                     pac.reverseDirection();
                     below = true;
                     hit = true;
                   } 
-                  if (((dotToPixel (j)) - fromPosition.x) > 0) {
+                  if (((dotToPixel (j)) - fromPosition.y) == 0) {
+                    if (pac.travelDirection == Dir.WEST) {
+                      left = true;
+                      hit = true;
+                      pac.reverseDirection();
+                    } else if (pac.travelDirection == Dir.EAST) {
+                      right = true;
+                      hit = true;
+                      pac.reverseDirection();
+                    }
+                  } 
+                  if (((dotToPixel (j)) - fromPosition.y) < 0) {
                     pac.reverseDirection();
                     above = true;
                     hit = true;
@@ -84,7 +106,8 @@ class Walls {
     }
   }
 
-
+//makes a wall for vertical oriented with vertically and shifter up dotspacing/2
+//makes a wall for horizontal oriented horizontally it shifts it + dotspacing/2
   void render() {
     for (int i = 0; i < boardHeight; i++) {
       for (int j = 0; j < boardWidth; j++) {
