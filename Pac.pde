@@ -58,7 +58,7 @@ class Pac {
   // Update the position, using the current speed & travel direction
   // If normal movement would hit a wall, find the position after bouncing off the wall.
   // The total distance travelled (before + after hitting the wall) should be the same.
-  void updatePosition(Walls walls) {
+  void updatePosition() {
     if (keyPressed == true) {
       if (keyCode == UP) {
         if (above == false) {

@@ -50,20 +50,16 @@ class Walls {
                   if (((dotToPixel (i)) - fromPosition.x) >= 0) {
                     pac.reverseDirection();
                     right = true;
-                    hit = true;
                   } 
                   if (((dotToPixel (i)) - fromPosition.x) < 0) {
                     pac.reverseDirection();
                     left = true;
-                    hit = true;
                   if (((dotToPixel (i)) - fromPosition.x) == 0) {
                     if (pac.travelDirection == Dir.NORTH) {
                       above = true;
-                      hit = true;
                       pac.reverseDirection();
                     } else if (pac.travelDirection == Dir.SOUTH) {
                       below = true;
-                      hit = true;
                       pac.reverseDirection();
                     }
                   } 
@@ -80,22 +76,89 @@ class Walls {
                   if (((dotToPixel (j)) - fromPosition.y) > 0) {
                     pac.reverseDirection();
                     below = true;
-                    hit = true;
                   } 
                   if (((dotToPixel (j)) - fromPosition.y) == 0) {
                     if (pac.travelDirection == Dir.WEST) {
                       left = true;
-                      hit = true;
                       pac.reverseDirection();
                     } else if (pac.travelDirection == Dir.EAST) {
                       right = true;
-                      hit = true;
                       pac.reverseDirection();
                     }
                   } 
                   if (((dotToPixel (j)) - fromPosition.y) < 0) {
                     pac.reverseDirection();
                     above = true;
+                  }
+                }
+              }
+          }
+        }
+      }
+    }
+  }
+
+  void collisionG(PVector fromPosition/*,PVector toPosition*/) {
+    rightG = false;
+    leftG = false;
+    aboveG = false;
+    belowG = false;
+    for (int i = 0; i < boardHeight; i++) {
+      for (int j = 0; j < boardWidth; j++) {
+        if (vertical [i] [j]) {
+          if (((dotToPixel (i)) - fromPosition.x) < ((pacSize/2)+(wallHor/2))) {
+            if (((dotToPixel (i)) - fromPosition.x) > (-((pacSize/2)+(wallHor/2))))
+              if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) < ((pacSize/2)+(wallVert/2))) {
+                if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) > (-((pacSize/2)+(wallVert/2)))) {
+                  if (((dotToPixel (i)) - fromPosition.x) >= 0) {
+                    ghosts.reverseDirection();
+                    rightG = true;
+                    hit = true;
+                  } 
+                  if (((dotToPixel (i)) - fromPosition.x) < 0) {
+                    ghosts.reverseDirection();
+                    leftG = true;
+                    hit = true;
+                  if (((dotToPixel (i)) - fromPosition.x) == 0) {
+                    if (pac.travelDirection == Dir.NORTH) {
+                      aboveG = true;
+                      hit = true;
+                      ghosts.reverseDirection();
+                    } else if (pac.travelDirection == Dir.SOUTH) {
+                      below = true;
+                      hit = true;
+                      ghosts.reverseDirection();
+                    }
+                  } 
+                  }
+                }
+              }
+          }
+        }
+        if (horizontal [i] [j]) {
+          if (((dotToPixel (i)+dotSpacing/2) - fromPosition.x) < ((pacSize/2)+(wallVert/2))) {
+            if (((dotToPixel (i)+dotSpacing/2) - fromPosition.x) > (-((pacSize/2)+(wallVert/2))))
+              if (((dotToPixel (j)) - fromPosition.y) < ((pacSize/2)+(wallHor/2))) {
+                if (((dotToPixel (j)) - fromPosition.y) > (-((pacSize/2)+(wallHor/2)))) {
+                  if (((dotToPixel (j)) - fromPosition.y) > 0) {
+                    ghosts.reverseDirection();
+                    belowG = true;
+                    hit = true;
+                  } 
+                  if (((dotToPixel (j)) - fromPosition.y) == 0) {
+                    if (pac.travelDirection == Dir.WEST) {
+                      leftG = true;
+                      hit = true;
+                      ghosts.reverseDirection();
+                    } else if (pac.travelDirection == Dir.EAST) {
+                      rightG = true;
+                      hit = true;
+                      ghosts.reverseDirection();
+                    }
+                  } 
+                  if (((dotToPixel (j)) - fromPosition.y) < 0) {
+                    ghosts.reverseDirection();
+                    aboveG = true;
                     hit = true;
                   }
                 }

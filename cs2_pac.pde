@@ -10,11 +10,17 @@ boolean above = false;
 boolean below = false;
 boolean right = false;
 boolean left = false;
+boolean aboveG = false;
+boolean belowG = false;
+boolean rightG = false;
+boolean leftG = false;
+
 boolean hit = false;
 
 Dots dots;
 Pac pac;
 Walls walls;
+Ghosts ghosts;
 
 // It's convenient to refer to two coordinate systems
 // Pixel coordinates are the usual Processing coordinates
@@ -40,6 +46,7 @@ void setup() {
   dots = new Dots();
   pac = new Pac();
   walls = new Walls();
+  ghosts = new Ghosts();
 }
 
 void draw() {
@@ -48,7 +55,8 @@ void draw() {
   pac.render();
   walls.render();
   dots.printScore();
-  pac.updatePosition(walls);
+  pac.updatePosition();
   dots.remove(pac.position);
-  println(pac.travelDirection);
+  ghosts.updatePositionG();
+  ghosts.render();
 }
