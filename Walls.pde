@@ -98,7 +98,7 @@ class Walls {
     }
   }
 
-  void collisionG(PVector fromPosition/*,PVector toPosition*/) {
+  void collisionG(PVector fromPosition, Ghosts g/*,PVector toPosition*/) {
     rightG = false;
     leftG = false;
     aboveG = false;
@@ -112,22 +112,22 @@ class Walls {
                 if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) > (-((pacSize/2)+(wallVert/2)))) {
                   if (((dotToPixel (i)) - fromPosition.x) >= 0) {
                     rightG = true;
-                    ghosts.randomMove();
+                    g.randomMove();
                     hit = true;
                   } 
                   if (((dotToPixel (i)) - fromPosition.x) < 0) {
                     leftG = true;
-                    ghosts.randomMove();
+                    g.randomMove();
                     hit = true;
                     if (((dotToPixel (i)) - fromPosition.x) == 0) {
                       if (pac.travelDirection == Dir.NORTH) {
                         aboveG = true;
                         hit = true;
-                        ghosts.randomMove();
+                        g.randomMove();
                       } else if (pac.travelDirection == Dir.SOUTH) {
                         below = true;
                         hit = true;
-                        ghosts.randomMove();
+                        g.randomMove();
                       }
                     }
                   }
@@ -142,23 +142,23 @@ class Walls {
                 if (((dotToPixel (j)) - fromPosition.y) > (-((pacSize/2)+(wallHor/2)))) {
                   if (((dotToPixel (j)) - fromPosition.y) > 0) {
                     belowG = true;
-                    ghosts.randomMove();
+                    g.randomMove();
                     hit = true;
                   } 
                   if (((dotToPixel (j)) - fromPosition.y) == 0) {
                     if (pac.travelDirection == Dir.WEST) {
                       leftG = true;
                       hit = true;
-                      ghosts.randomMove();
+                      g.randomMove();
                     } else if (pac.travelDirection == Dir.EAST) {
                       rightG = true;
                       hit = true;
-                      ghosts.randomMove();
+                      g.randomMove();
                     }
                   } 
                   if (((dotToPixel (j)) - fromPosition.y) < 0) {
                     aboveG = true;
-                    ghosts.randomMove();
+                    g.randomMove();
                     hit = true;
                   }
                 }
