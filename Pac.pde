@@ -90,7 +90,6 @@ class Pac {
     wrapPosition(position);
     walls.collision(position);
     moveIfCollide();
-    println(travelDirection);
   }
   void moveIfCollide () {
     if (right) {

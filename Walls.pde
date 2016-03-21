@@ -54,15 +54,15 @@ class Walls {
                   if (((dotToPixel (i)) - fromPosition.x) < 0) {
                     pac.reverseDirection();
                     left = true;
-                  if (((dotToPixel (i)) - fromPosition.x) == 0) {
-                    if (pac.travelDirection == Dir.NORTH) {
-                      above = true;
-                      pac.reverseDirection();
-                    } else if (pac.travelDirection == Dir.SOUTH) {
-                      below = true;
-                      pac.reverseDirection();
+                    if (((dotToPixel (i)) - fromPosition.x) == 0) {
+                      if (pac.travelDirection == Dir.NORTH) {
+                        above = true;
+                        pac.reverseDirection();
+                      } else if (pac.travelDirection == Dir.SOUTH) {
+                        below = true;
+                        pac.reverseDirection();
+                      }
                     }
-                  } 
                   }
                 }
               }
@@ -111,25 +111,25 @@ class Walls {
               if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) < ((pacSize/2)+(wallVert/2))) {
                 if (((dotToPixel (j)+dotSpacing/2) - fromPosition.y) > (-((pacSize/2)+(wallVert/2)))) {
                   if (((dotToPixel (i)) - fromPosition.x) >= 0) {
-                    ghosts.reverseDirection();
                     rightG = true;
+                    ghosts.randomMove();
                     hit = true;
                   } 
                   if (((dotToPixel (i)) - fromPosition.x) < 0) {
-                    ghosts.reverseDirection();
                     leftG = true;
+                    ghosts.randomMove();
                     hit = true;
-                  if (((dotToPixel (i)) - fromPosition.x) == 0) {
-                    if (pac.travelDirection == Dir.NORTH) {
-                      aboveG = true;
-                      hit = true;
-                      ghosts.reverseDirection();
-                    } else if (pac.travelDirection == Dir.SOUTH) {
-                      below = true;
-                      hit = true;
-                      ghosts.reverseDirection();
+                    if (((dotToPixel (i)) - fromPosition.x) == 0) {
+                      if (pac.travelDirection == Dir.NORTH) {
+                        aboveG = true;
+                        hit = true;
+                        ghosts.randomMove();
+                      } else if (pac.travelDirection == Dir.SOUTH) {
+                        below = true;
+                        hit = true;
+                        ghosts.randomMove();
+                      }
                     }
-                  } 
                   }
                 }
               }
@@ -141,24 +141,24 @@ class Walls {
               if (((dotToPixel (j)) - fromPosition.y) < ((pacSize/2)+(wallHor/2))) {
                 if (((dotToPixel (j)) - fromPosition.y) > (-((pacSize/2)+(wallHor/2)))) {
                   if (((dotToPixel (j)) - fromPosition.y) > 0) {
-                    ghosts.reverseDirection();
                     belowG = true;
+                    ghosts.randomMove();
                     hit = true;
                   } 
                   if (((dotToPixel (j)) - fromPosition.y) == 0) {
                     if (pac.travelDirection == Dir.WEST) {
                       leftG = true;
                       hit = true;
-                      ghosts.reverseDirection();
+                      ghosts.randomMove();
                     } else if (pac.travelDirection == Dir.EAST) {
                       rightG = true;
                       hit = true;
-                      ghosts.reverseDirection();
+                      ghosts.randomMove();
                     }
                   } 
                   if (((dotToPixel (j)) - fromPosition.y) < 0) {
-                    ghosts.reverseDirection();
                     aboveG = true;
+                    ghosts.randomMove();
                     hit = true;
                   }
                 }
@@ -169,8 +169,8 @@ class Walls {
     }
   }
 
-//makes a wall for vertical oriented with vertically and shifter up dotspacing/2
-//makes a wall for horizontal oriented horizontally it shifts it + dotspacing/2
+  //makes a wall for vertical oriented with vertically and shifter up dotspacing/2
+  //makes a wall for horizontal oriented horizontally it shifts it + dotspacing/2
   void render() {
     for (int i = 0; i < boardHeight; i++) {
       for (int j = 0; j < boardWidth; j++) {

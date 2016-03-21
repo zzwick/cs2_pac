@@ -37,7 +37,7 @@ class Dots {
   }
 
   void printScore () {
-    textSize(32);
+    textSize(25);
     text(count, 10, 30);
   }
 

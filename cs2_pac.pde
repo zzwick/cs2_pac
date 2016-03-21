@@ -14,6 +14,8 @@ boolean aboveG = false;
 boolean belowG = false;
 boolean rightG = false;
 boolean leftG = false;
+boolean killed = false;
+int numGhosts = 1;
 
 boolean hit = false;
 
@@ -47,6 +49,9 @@ void setup() {
   pac = new Pac();
   walls = new Walls();
   ghosts = new Ghosts();
+  dots.count = 0;
+  killed = false;
+  numGhosts = 1;
 }
 
 void draw() {
@@ -59,4 +64,25 @@ void draw() {
   dots.remove(pac.position);
   ghosts.updatePositionG();
   ghosts.render();
+//  newGhosts();  
+}
+
+void lose () {
+  if (killed == true) {
+    println(ghosts.position);
+    println(pac.position);
+    setup();
+  }
+}
+
+void newGhosts () {
+  if (dots.count > 50 && numGhosts <2) {
+    ghosts = new Ghosts();
+  }
+  if (dots.count > 100 && numGhosts <3) {
+    ghosts = new Ghosts();
+  }
+    if (dots.count > 150 && numGhosts <3) {
+    ghosts = new Ghosts();
+  }
 }
