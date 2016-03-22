@@ -21,6 +21,7 @@ Dots dots;
 Pac pac;
 Walls walls;
 ArrayList <Ghosts> ghosts;
+Power power;
 
 // It's convenient to refer to two coordinate systems
 // Pixel coordinates are the usual Processing coordinates
@@ -46,6 +47,7 @@ void setup() {
   dots = new Dots();
   pac = new Pac();
   walls = new Walls();
+  power = new Power();
   ghosts = new ArrayList ();
   dots.count = 0;
   killed = false;
@@ -60,11 +62,16 @@ void draw() {
   dots.printScore();
   pac.updatePosition();
   dots.remove(pac.position);
+  power.updatePow();
   for (int i = 0; i < ghosts.size(); i++) {
-  ghosts.get(i).updatePositionG(ghosts.get(i));
-  ghosts.get(i).render();
-  newGhosts();
-  lose();
+    if (ghosts.get(i).gKill) {
+      ghosts.remove(i);
+    } else {
+      ghosts.get(i).updatePositionG(ghosts.get(i));
+      ghosts.get(i).render();
+      newGhosts();
+      lose();
+    }
   }
 }
 
@@ -75,18 +82,29 @@ void lose () {
 }
 
 void newGhosts () {
-  /*if (dots.count % 50 == 0) {
-    if (ghosts.size() < (dots.count/50))
-    ghosts.add(new Ghosts());
+  if (dots.count % 10 == 0) {
+    if (ghosts.size() < (dots.count/10)) {
+      ghosts.add(new Ghosts());
+    }
   }
-}*/
-  if (dots.count > 50 && ghosts.size() <2) {
-    ghosts.add(new Ghosts());
-  }
-  if (dots.count > 100 && ghosts.size() <3) {
-    ghosts.add(new Ghosts());
-  }
-  if (dots.count > 150 && ghosts.size() <3) {
-    ghosts.add(new Ghosts());
-  }
+  /*
+  if (dots.count > 25 && ghosts.size() <2) {
+   ghosts.add(new Ghosts());
+   }
+   if (dots.count > 50 && ghosts.size() <3) {
+   ghosts.add(new Ghosts());
+   }
+   if (dots.count > 75 && ghosts.size() <3) {
+   ghosts.add(new Ghosts());
+   }
+   if (dots.count > 100 && ghosts.size() <4) {
+   ghosts.add(new Ghosts());
+   }
+   if (dots.count > 125 && ghosts.size() <5) {
+   ghosts.add(new Ghosts());
+   }
+   if (dots.count > 300 && ghosts.size() <6) {
+   ghosts.add(new Ghosts());
+   }
+   */
 }
