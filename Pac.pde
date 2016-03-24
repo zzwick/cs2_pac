@@ -21,7 +21,12 @@ class Pac {
   // Draw the Pac, as a circle
   void render() {
     ellipseMode(CENTER);
+    if (power.killer) {
+      fill(0,255,255);
+    }
+    else {
     fill(0, 200, 0);
+    }
     ellipse(position.x, position.y, pacSize, pacSize);
   }
 

@@ -16,6 +16,7 @@ boolean rightG = false;
 boolean leftG = false;
 boolean killed = false;
 boolean hit = false;
+int ghostsRemoved = 0;
 
 Dots dots;
 Pac pac;
@@ -83,7 +84,7 @@ void lose () {
 
 void newGhosts () {
   if (dots.count % 10 == 0) {
-    if (ghosts.size() < (dots.count/10)) {
+    if ((ghosts.size()+ghostsRemoved) < (dots.count/10)) {
       ghosts.add(new Ghosts());
     }
   }
